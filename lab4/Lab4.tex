@@ -1,0 +1,71 @@
+\documentclass[titlepage]{article}
+\usepackage[ukrainian]{babel}
+\usepackage{listings}
+\usepackage{amsmath}
+\usepackage{fontspec}
+\setmainfont{Times New Roman}
+\usepackage{setspace}
+%\spacing{1.7}
+\usepackage{fancyhdr}
+\usepackage{titling}
+\usepackage[a4paper, top = 20mm, bottom = 20mm, left = 25mm, right = 15mm]{geometry}
+\usepackage{graphicx}
+
+\lstset{
+	basicstyle=\large,
+	breaklines = true,
+	language = matlab,
+	breakatwhitespace = true,
+	numbers = left,
+	numberstyle = \tiny,
+	columns = flexible,
+	frame=tb,
+	tabsize=4
+}
+
+\makeatletter
+\renewcommand\normalsize{%
+\@setfontsize\normalsize{14pt}{15pt}}
+\makeatother
+
+\preauthor{\begin{flushright}}
+\postauthor{\end{flushright}}
+
+\fancypagestyle{empty}{%
+	\renewcommand{\headrulewidth}{0pt}
+	\cfoot{\normalsize2016}
+	\chead{\uppercase{київський національний університет імені тараса шевченка}}
+}
+
+
+\begin{document}
+
+\title{\normalsize Лабораторна робота \textnumero 4}
+\author{\vspace{5cm}Виконав: \protect\\ студент 4-го курсу \protect\\ спеціальність Математика \protect\\ Шатохін Михайло}
+\date{}
+\maketitle
+\section{Постановка задачі}
+Необхідно обчислити інтеграл $I=\int_{\alpha}^{\beta}{\!\rho(x)U(x)\,dx}$ за допомогою квадратурної формули:
+\[I=\int_{a}^{b}{\!\rho(x)U(x)\,dx} \approx \sum_{k=1}^{n}{A_kf(x_k)}\]
+В даній задачі:
+\begin{description}
+\item $\rho(x) =  1 + x$,
+\item $[a,b] = [0,1]$,
+\item $n = 7$,
+\item $[\alpha, \beta] = [7, 21]$,
+\item $U(x) = e^\frac{-x}{21+x}$.
+\end{description}
+\section{Практична реалізація}
+У функції main відбувається ініціалізація параметрів задачі, виклик основної частини алгоритму та виведення результату.
+\lstinputlisting[title=main.m, language=octave]{./main.m}
+У функції GetInterpolationCoefficients відбувається пошук квадратурної формули найвищого степеня точності.
+\lstinputlisting[title=GetInterpolationCoefficients.m, language=octave]{./GetInterpolationCoefficients.m}
+У функції Interpolate відбувається підрахунок інтеграла за допомогою квадратурної формули.
+\lstinputlisting[title=Interpolate.m, language=octave]{./Interpolate.m}
+Функція SimpsonsMethod здійснює обрахунок інтеграла методом Сімпсона.
+\lstinputlisting[title=SimpsonsMethod.m, language=octave]{./SimpsonsMethod.m}
+Файл params.mat містить параметри задачі. Вони наведені у зрозумілому людині вигляді.
+\lstinputlisting[title=params.mat, language=octave]{./params.mat}
+В результаті роботи програми отримуємо такий результат:
+\lstinputlisting[title=output.txt, language=octave]{./output.txt}
+\end{document}

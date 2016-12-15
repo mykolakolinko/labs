@@ -1,0 +1,16 @@
+# name: operatorCoefficients
+# type: matrix
+# rows: 1
+# columns: 6
+ 1 0 13 0 21 1
+# name: divisionNumber
+# type: scalar
+ 8
+# name: pointNumber
+# type: scalar
+ 4
+# name: interval
+# type: matrix
+# rows: 1
+# columns: 2
+ 0 1

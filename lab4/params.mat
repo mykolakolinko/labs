@@ -1,0 +1,22 @@
+# name: func
+# type: function handle
+ @<anonymous>
+ @(t, g, k)(exp(-(t ^ g)/(t + k)))
+# name: weight
+# type: function handle
+ @<anonymous>
+ @(t, g)(1 + (t ^ g))
+# name: interpolationInterval
+# type: matrix
+# rows: 1
+# columns: 2
+ 0 1
+# name: k
+# type: scalar
+ 21
+# name: g
+# type: scalar
+ 1
+# name: d
+# type: scalar
+ 13

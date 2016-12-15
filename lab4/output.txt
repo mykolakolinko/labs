@@ -1,0 +1,25 @@
+>>main
+points =
+
+  -1.974775
+   0.038479
+   0.200605
+   0.446455
+   0.697703
+   0.889715
+   0.984829
+
+coefficients =
+
+   1.8360e-06
+   1.0336e-01
+   2.6011e-01
+   3.7770e-01
+   3.9135e-01
+   2.7758e-01
+   8.9895e-02
+
+interpolatedIntegral =  91.902
+approximatedIntegral =  91.902
+difference is 0.000070
+>>

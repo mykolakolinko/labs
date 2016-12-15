@@ -1,0 +1,86 @@
+\documentclass[titlepage]{article}
+\usepackage[ukrainian]{babel}
+\usepackage{listings}
+\usepackage{amsmath}
+\usepackage{fontspec}
+\setmainfont{Times New Roman}
+\usepackage{setspace}
+%\spacing{1.7}
+\usepackage{fancyhdr}
+\usepackage{titling}
+\usepackage[a4paper, top = 20mm, bottom = 20mm, left = 25mm, right = 15mm]{geometry}
+
+\lstset{
+	basicstyle=\large,
+	breaklines = true,
+	language = matlab,
+	breakatwhitespace = true,
+	numbers = left,
+	numberstyle = \small,
+	columns = flexible,
+	frame=tb,
+	tabsize=4
+}
+
+\makeatletter
+\renewcommand\normalsize{%
+\@setfontsize\normalsize{14pt}{15pt}}
+\makeatother
+
+\preauthor{\begin{flushright}}
+\postauthor{\end{flushright}}
+
+\fancypagestyle{empty}{%
+	\renewcommand{\headrulewidth}{0pt}
+	\cfoot{\normalsize2016}
+	\chead{\uppercase{київський національний університет імені тараса шевченка}}
+}
+
+
+\begin{document}
+
+\title{\normalsize Лабораторна робота \textnumero 3}
+\author{\vspace{5cm}Виконав: \protect\\ студент 4-го курсу \protect\\ спеціальність Математика \protect\\ Шатохін Михайло}
+\date{}
+\maketitle
+\section{Постановка задачі} На відрізку $[a,b]$ методом невизначених коефіцієнтів Коллатца побудувати в точці $x_i \in \{x_j\}_{j=1}^{r+1}$ апроксимацію лінійного диференціального оператора
+\[Lu(x)=u(x)+du^{(2)}(x)+ku^{(4)}(x)+u^{(m)}(x)\]
+з порядком $q=r+1-m\equiv g$. Тут введено позначення:
+\begin{description}
+\item $[a,b] = [0,1]$,
+\item $x_j=a+(j-1)h, \quad h=\frac{b-a}{r},\quad j = \overline{1,r+1}$,
+\item $m=g+4,\quad i=mod(d, r+1)$,
+\item $k$ --- номер за списком студента в групі,
+\item $g$ --- номер групи,
+\item $d$ --- день народження студента.
+\end{description}
+\section{Теоретичні відомості}
+Для апроксимації оператора використовується метод невизначених коефіцієнтів Коллатца. Згідно з цим методом необхідно визначитися з так званим шаблоном $S(x_i)$, вузли якого і відповідні значення функції $u(x)$ використовуються у формулі числового диференціювання. Крім того, цей метод передбачає рівномірний розподіл вузлів $x_i$. За таких припущень формула числового диференціювання є зваженою сумою значень функції $u(x)$ у точках шаблона де коефіцієнти --- невідомі, а їх кількість $(r + 1)$ залежить від заданого порядку апроксимації диференціального оператора і визначиться пізніше. Ідея методу полягає у знаходженні таких значень коефіцієнтів $c_i$, щоб забезпечити найбільший порядок нев'язки. Вимагаючи певного порядку нев'язки, необхідно перш за все забезпечити в її розвиненні у ряд Тейлора нульові коефіцієнти похідних функції $u(x)$ до $m$-го порядку включно, а також додаткові рівняння для складання замкненої системи рівнянь щодо знаходження коефіцієнтів $c_i$. Тобто, усього рівнянь має бути $(r + 1)$, причому $r \ge m$. Запишемо розвинення нев'язки
+$\psi(x)^2$ у ряд Тейлора в околі точки шаблона $x_i$, отримаємо систему лінійних алгебраїчних рівнянь відносно коефіцієнтів $c_i$ з такою розширеною матрицею:
+\begin{equation*}
+\left(\begin{array}{cccc|c}
+1&1&\ldots &1&a_0\\
+a_0&a_1&\ldots&a_r&\frac{a_1}{h}\\
+\ldots&\ldots&\ldots&\ldots&\ldots\\
+a_0^m&a_1^m&\ldots&a_r^m&m!\frac{a_m}{h^m}\\
+a_0^{m+1}&a_1^{m+1}&\ldots&a_r^{m+1}&0\\
+\ldots&\ldots&\ldots&\ldots&\ldots\\
+a_0^{r}&a_1^{r}&\ldots&a_r^{r}&0
+\end{array}\right)
+\end{equation*}
+матрицею Вандермонда, що не дорівнює нулю, тому що $a_k$ попарно різні. Це означає, що система лінійних алгебраїчних рівнянь відносно коефіцієнтів $c_i$ має єдиний розв'язок.
+\section{Практична реалізація}
+Нижче наведена реалізація методу невизначених коефіцієнтів Коллатца мовою Matlab. 
+\paragraph{}
+Функція main здійснює ініціалізацію параметрів задачі та виклик функції \\GetCollatzCoefficients, яка виконує основні обрахунки.
+\lstinputlisting[title=main.m]{./main.m}
+\paragraph{}
+Функція GetCollatzCoefficients власне містить інтерпретацію мовою ./Matlab наведеного вище алгоритму невизначених коефіцієнтів Коллатца.
+\lstinputlisting[title=GetCollatzCoefficients.m]{./GetCollatzCoefficients.m}
+\paragraph{}
+Використаний у функції main файл params.mat містить параметри задачі, що наведені в постановці задачі. Наведено текстовий варіант цього файлу з метою можливості його розуміння людиною.
+\lstinputlisting[title=params.mat, language=octave]{./params.mat}
+\paragraph{}
+В результаті роботи даної програми отримується наступний результат
+\lstinputlisting{./lab3output.txt}
+\end{document}

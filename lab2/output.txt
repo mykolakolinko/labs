@@ -1,0 +1,4 @@
+>>main
+Initiating with parameters: group number = 1, student number = 21, birth date = 7
+Solution found in 5 steps
+>>

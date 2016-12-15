@@ -1,0 +1,41 @@
+# name: precision
+# type: scalar
+ 1e-5
+# name: maxIterations
+# type: scalar
+ 100
+# name: n
+# type: scalar
+ 101
+# name: intervalStart
+# type: scalar
+ 0
+# name: groupNumber
+# type: scalar
+ 1
+# name: studentNumber
+# type: scalar
+ 21
+# name: gamma1
+# type: scalar
+ 1
+# name: gamma2
+# type: scalar
+ 7
+# name: phi
+# type: function handle
+ @<anonymous>
+ @(t, g, k)(t ^ g + cos(t + k));
+# name: xi
+# type: function handle
+ @<anonymous>
+ @(t, k)(t ^ 3 + cos((t - k) ^ 2) / k);
+# name: p
+# type: function handle
+ @<anonymous>
+ @(t, g, a, b)((t - a) .^ g .* (b - t));
+# name: f
+# type: function handle
+ @<anonymous>
+ @(t, v)(exp(-t + v) - t .* v);
+
